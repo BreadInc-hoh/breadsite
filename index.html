@@ -14,7 +14,8 @@
         <p>
             Hello, we are bread inc. We supply Bread to Hastings On Husdon, 
             and <em>only</em> Hastings On Hudson. Our small team of four people 
-            makes the best bread at a resonable price. 
+            makes the best bread at a resonable price. Our goal is to make delicous
+            bread without using the preservatives found in supermarket breads.
         </p>
         <br/>
         <h2>Our Breads</h2>
@@ -31,7 +32,17 @@
                 your hearts content.
             </p>
             <li>Bagguettes</li>
+            <p style="text-indent: 2.5%;">
+                Not much is better than a good baguette! 
+                With a crispy crust and a light crumb you'll wonder 
+                how they got eaten so fast. Not only this, but the Bagguettes 
+                are perfect for large, delicious sandwiches.
+            </p>
             <li>White Bread</li>
+            <p style="text-indent: 2.5%;">
+                The Classic loaf that almost every household has. 
+                Great for toast or any other thing you use with white bread.
+            </p>
         </ul>
         <br/>
         <h2>
@@ -42,7 +53,86 @@
             it will send an email to us. We will then review your email and reply when
             your order is accepted and again when it is ready for pickup. When your bread is 
             ready, go to the pickup location, at the time and date to pick up your bread.
+            We only accept cash.
         </p>
+        <br/>
+        <form id="breadOrderForm">
+            <!-- Dropdown for Bread 1 -->
+            <label for="bread1">Select your first bread type:</label>
+            <br/>
+            <select id="bread1" name="bread1" required>
+                <option value="">--Select Bread--</option>
+                <option value="Basic Loaf">Basic Loaf</option>
+                <option value="Bagguette">Bagguette</option>
+                <option value="White Bread">White Bread</option>
+            </select>
+            <br/>
+            <br/>
+            <!-- Number of Loaves for Bread 1 -->
+            <label for="loaves1">Number of loaves for first bread:</label>
+            <br/>
+            <input type="number" id="loaves1" name="loaves1" min="1" max="3" required>
+            <br/>
+            <br/>
+            <!-- Dropdown for Bread 2 -->
+            <label for="bread2">Select your second bread type (optional):</label>
+            <br/>
+            <select id="bread2" name="bread2">
+                <option value="">--Select Bread--</option>
+                <option value="Basic Loaf">Basic Loaf</option>
+                <option value="Bagguette">Bagguette</option>
+                <option value="White Bread">White Bread</option>
+            </select>
+            <br/>
+            <br/>
+            <!-- Number of Loaves for Bread 2 -->
+            <label for="loaves2">Number of loaves for second bread (if selected):</label>
+            <br/>
+            <input type="number" id="loaves2" name="loaves2" min="0" max="3">
+            <br/>
+            <br/>
+            <!-- Email -->
+            <label for="email">Your email address:</label>
+            <br/>
+            <input type="email" id="email" name="email" required>
+            <br/>
+            <br/>
+            <!-- Special Instructions -->
+            <label for="instructions">Special instructions (optional):</label>
+            <br/>
+            <textarea id="instructions" name="instructions" rows="4"></textarea>
+            <br/>
+            <br/>
+            <!-- Submit Button -->
+            <button type="submit">Place Order</button>
+        </form>
+        <script>
+            document.getElementById('breadOrderForm').addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent the default form submission
+                const bread1 = document.getElementById('bread1').value;
+                const loaves1 = document.getElementById('loaves1').value;
+                const bread2 = document.getElementById('bread2').value;
+                const loaves2 = document.getElementById('loaves2').value || 0;
+                const email = document.getElementById('email').value;
+                const instructions = document.getElementById('instructions').value;
+    
+                if (!bread1 && !bread2) {
+                    alert('You must select at least one bread type.');
+                    return;
+                }
+    
+                const orderDetails = `
+                    Bread 1: ${bread1} (${loaves1} loaves)
+                    Bread 2: ${bread2 ? `${bread2} (${loaves2} loaves)` : 'N/A'}
+                    Email: ${email}
+                    Special Instructions: ${instructions || 'None'}
+                `;
+    
+                // Replace the following with your email sending logic
+                console.log(orderDetails);
+                alert('Order placed successfully! Check console for details.');
+            });
+        </script>
         <br/>
         <br/>
         <br/>
