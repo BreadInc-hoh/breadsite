@@ -1,8 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Bread Inc.</title>
         <link rel="stylesheet" href="breadstyle.css" />
+
+        <script type="text/javascript"
+            src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+        </script>
+        <script type="text/javascript">
+            (function(){
+                emailjs.init({
+                    publicKey: "zINpvtxcE3oAmEyKA",
+                });
+            })();
+        </script>
+
     </head>
     <body>
         <div class="container">
@@ -108,29 +122,36 @@
         </form>
         <script>
             document.getElementById('breadOrderForm').addEventListener('submit', function(event) {
-                event.preventDefault(); // Prevent the default form submission
+                event.preventDefault();
+    
+                // Get form data
                 const bread1 = document.getElementById('bread1').value;
                 const loaves1 = document.getElementById('loaves1').value;
-                const bread2 = document.getElementById('bread2').value;
+                const bread2 = document.getElementById('bread2').value || 'None';
                 const loaves2 = document.getElementById('loaves2').value || 0;
                 const email = document.getElementById('email').value;
-                const instructions = document.getElementById('instructions').value;
+                const instructions = document.getElementById('instructions').value || 'None';
     
-                if (!bread1 && !bread2) {
-                    alert('You must select at least one bread type.');
+                if (!bread1) {
+                    alert('Please select at least one bread type.');
                     return;
                 }
     
-                const orderDetails = `
-                    Bread 1: ${bread1} (${loaves1} loaves)
-                    Bread 2: ${bread2 ? `${bread2} (${loaves2} loaves)` : 'N/A'}
-                    Email: ${email}
-                    Special Instructions: ${instructions || 'None'}
-                `;
-    
-                // Replace the following with your email sending logic
-                console.log(orderDetails);
-                alert('Order placed successfully! Check console for details.');
+                // Send email using EmailJS
+                emailjs.send('service_lgvribc', 'template_3w1awbe', {
+                    bread1,
+                    loaves1,
+                    bread2,
+                    loaves2,
+                    email,
+                    instructions
+                }).then(function(response) {
+                    alert('Order placed successfully!');
+                    console.log('SUCCESS!', response.status, response.text);
+                }, function(error) {
+                    alert('Failed to place order. Please try again later.');
+                    console.error('FAILED...', error);
+                });
             });
         </script>
         <br/>
@@ -138,7 +159,19 @@
         <br/>
         <small>
             <small>
-                <p>Website design by:<br/>gamemakerj11@gmail.com</p>
+                <p>
+                    Website design by:
+                    <br/>
+                    gamemakerj11@gmail.com
+                    <br/>
+                    <small>
+                        With help from FreeDNS (afraid.org);
+                        
+                        Email.js;
+                        
+                        and ChatGPT
+                    </small>
+                </p>
             </small>
         </small>
     </body>
