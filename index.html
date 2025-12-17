@@ -57,15 +57,6 @@
                 The Classic loaf that almost every household has. 
                 Great for toast or any other thing you use with white bread.
             </p>
-            <li>Bagels - $1.50</li>
-            <p style="text-indent: 2.5%;">
-                Homemade plain bagles, what else is there to say? 
-            </p>
-            <li>Sesame Bagels - $1.50</li>
-            <p style="text-indent: 2.5%;">
-                These bagels are the exact same as the regular bagels,
-                just they have sesame seeds on top. 
-            </p>
             <li>Cornbread - $4</li>
             <p style="text-indent: 2.5%;">
                  Delicious, soft, Sweet, fluffy Cornbread. Perfect for with any meal,
@@ -94,8 +85,6 @@
                 <option value="Basic Loaf">Basic Loaf</option>
                 <option value="Bagguette">Bagguette</option>
                 <option value="White Bread">White Bread</option>
-                <option value="Plain Bagel">Plain Bagel</option>
-                <option value="Sesame Bagel">Sesame Bagel</option>
                 <option value="Cornbread">Cornbread</option>
             </select>
             <br/>
@@ -114,8 +103,6 @@
                 <option value="Basic Loaf">Basic Loaf</option>
                 <option value="Bagguette">Bagguette</option>
                 <option value="White Bread">White Bread</option>
-                <option value="Plain Bagel">Plain Bagel</option>
-                <option value="Sesame Bagel">Sesame Bagel</option>
                 <option value="Cornbread">Cornbread</option>
             </select>
             <br/>
@@ -152,12 +139,12 @@
                 const loaves2 = document.getElementById('loaves2').value || 0;
                 const email = document.getElementById('email').value;
                 const instructions = document.getElementById('instructions').value || 'None';
-    
+                
                 if (!bread1) {
                     alert('Please select at least one bread type.');
                     return;
                 }
-    
+                
                 // Send email using EmailJS
                 emailjs.send('service_lgvribc', 'template_3w1awbe', {
                     bread1,
